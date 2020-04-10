@@ -6,8 +6,6 @@ const app = express();
 const port = 9000;
 
 const getImagePath = image => path.resolve(__dirname, 'public/image', image);
-// console.log()
-
 
 const USERS = [];
 const PRODUCTS = {
@@ -87,6 +85,40 @@ const ORDERS = [];
 app.use(express.json());
 //TODO only for develop
 app.use(cors());
+
+app.post('/api/register', (req, res) => {
+    const user = {
+        ...req.body,
+        id: v4()
+    };
+    USERS.push(user);
+    res.json({
+        msg: 'User created',
+        user: {
+            id: user.id,
+            name: user.name
+        }
+    })
+});
+
+app.get('/api/login', (req, res) => {
+    const {name, password} = req.body;
+    const index = USERS.findIndex(item => item.name === name);
+    if (index === -1) {
+        res.json({
+            msg: 'No user with login ' + name
+        })
+    }
+    if (USERS[index].password === password) {
+        res.json({
+            msg: 'Logged in successfully'
+        })
+    } else {
+        res.json({
+            msg: 'Password is incorrect'
+        })
+    }
+});
 
 app.get('/api/products/:productType', (req, res) => {
     const id = req.params['productType'];
