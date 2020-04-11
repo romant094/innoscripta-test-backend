@@ -5,44 +5,82 @@ module.exports = function (app, db) {
     app.post('/api/register', (req, res) => {
         const user = {
             ...req.body,
+            name: req.body.name.toLowerCase(),
             id: v4()
         };
-        // TODO check is such login exists
-        db.collection('users').insertOne(user, (err, result) => {
+
+        db.collection('users').findOne({name: user.name}, function (err, result) {
             if (err) {
-                res.json({err});
+                sendDataBaseError(res, err)
+            }
+            if (!result) {
+                createUser(user, res)
             } else {
-                res.json({
-                    msg: 'User created',
-                    user: {
-                        id: user.id,
-                        name: user.name
-                    }
-                })
+                sendReply({
+                    msg: `User ${user.name} already exists`
+                }, res, 400)
             }
         });
     });
 
-    // app.get('/api/login', (req, res) => {
-    //     const {name, password} = req.body;
-    //     const index = USERS.findIndex(item => item.name === name);
-    //     if (index === -1) {
-    //         res.json({
-    //             msg: 'No user with login ' + name
-    //         })
-    //     }
-    //     if (USERS[index].password === password) {
-    //         res.json({
-    //             msg: 'Logged in successfully'
-    //         })
-    //     } else {
-    //         res.json({
-    //             msg: 'Password is incorrect'
-    //         })
-    //     }
-    // });
-};
+    app.post('/api/login', (req, res) => {
+        const user = {
+            ...req.body,
+            name: req.body.name.toLowerCase()
+        };
 
+        db.collection('users').findOne({name: user.name}, function (err, result) {
+            if (err) {
+                sendDataBaseError(res, err)
+            }
+            if (!result) {
+                sendReply({
+                    msg: `User ${user.name} does not exist`
+                }, res, 400);
+
+                return false;
+            }
+
+            const {name, id, password} = result;
+            if (user.password === password) {
+                sendReply({
+                    msg: `Successfully logged in`,
+                    result: {id, name}
+                }, res)
+            } else {
+                sendReply({
+                    msg: 'Password is incorrect'
+                }, res)
+            }
+        });
+    });
+
+
+    const sendReply = (body, res, status = 200) => res.status(status).json({
+        ...body
+    });
+
+    const sendDataBaseError = (res, err) => res.status(500).json({
+        msg: 'Database error',
+        result: err
+    });
+
+    const createUser = (user, res) => {
+        db.collection('users').insertOne(user, (err, result) => {
+            if (err) {
+                res.json({err});
+            } else {
+                sendReply({
+                    msg: 'User created',
+                    result: {
+                        id: user.id,
+                        name: user.name
+                    }
+                }, res)
+            }
+        });
+    }
+};
 
 // const path = require('path');
 //
