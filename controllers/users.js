@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const {DATABASE_CONNECTION_OPTIONS} = require('../constants');
 
 const connUri = process.env.MONGO_URL;
 
 module.exports = {
     add: (req, res) => {
-        mongoose.connect(connUri, {useNewUrlParser: true}, (err) => {
+        mongoose.connect(connUri, DATABASE_CONNECTION_OPTIONS, (err) => {
             let result = {};
             let status = 201;
             if (!err) {
                 const {name, password} = req.body;
-                const user = new User({name, password}); // document = instance of a model
-                // TODO: We can hash the password here before we insert instead of in the model
+                const user = new User({name, password});
                 user.save((err, user) => {
                     if (!err) {
                         result.status = status;
@@ -36,22 +36,19 @@ module.exports = {
     login: (req, res) => {
         const {name, password} = req.body;
 
-        mongoose.connect(connUri, {useNewUrlParser: true}, (err) => {
+        mongoose.connect(connUri, DATABASE_CONNECTION_OPTIONS, (err) => {
             let result = {};
             let status = 200;
             if (!err) {
                 User.findOne({name}, (err, user) => {
                     if (!err && user) {
-                        // We could compare passwords in our model instead of below as well
                         bcrypt.compare(password, user.password).then(match => {
                             if (match) {
                                 status = 200;
-                                // Create a token
                                 const payload = {user: user.name};
                                 const options = {expiresIn: '2d'};
                                 const secret = process.env.JWT_SECRET;
 
-                                // console.log('TOKEN', token);
                                 result.token = jwt.sign(payload, secret, options);
                                 result.status = status;
                                 result.result = user;
@@ -83,7 +80,7 @@ module.exports = {
         });
     },
     getAll: (req, res) => {
-        mongoose.connect(connUri, {useNewUrlParser: true}, (err) => {
+        mongoose.connect(connUri, DATABASE_CONNECTION_OPTIONS, (err) => {
             let result = {};
             let status = 200;
             if (!err) {
