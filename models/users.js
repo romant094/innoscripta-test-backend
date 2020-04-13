@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const environment = process.env.NODE_ENV;
 const stage = require('../config')[environment];
 
-// schema maps to a collection
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -22,22 +21,30 @@ const userSchema = new Schema({
     phone: {
         type: 'String',
         required: false,
-        trim: true
+        trim: true,
+        default: ''
     },
     address: {
         type: 'String',
         required: false,
-        trim: true
+        trim: true,
+        default: ''
+    },
+    orders: {
+        type: 'String',
+        required: false,
+        trim: true,
+        default: ''
     }
 });
 
 // encrypt password before save
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     const user = this;
-    if(!user.isModified || !user.isNew) { // don't rehash if it's an old user
+    if (!user.isModified || !user.isNew) { // don't rehash if it's an old user
         next();
     } else {
-        bcrypt.hash(user.password, stage.saltingRounds, function(err, hash) {
+        bcrypt.hash(user.password, stage.saltingRounds, function (err, hash) {
             if (err) {
                 console.log('Error hashing password for user', user.name);
                 next(err);

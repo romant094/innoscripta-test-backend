@@ -46,16 +46,20 @@ module.exports = {
                             if (match) {
                                 status = 200;
                                 const payload = {user: user.name};
-                                const options = {expiresIn: '2d'};
+                                const options = {expiresIn: '2d', issuer: 'pacmanpizza'};
                                 const secret = process.env.JWT_SECRET;
 
-                                result.token = jwt.sign(payload, secret, options);
+                                const token = jwt.sign(payload, secret, options);
+                                res.cookie('token', token);
+                                result.result = {
+                                    token,
+                                    user
+                                };
                                 result.status = status;
-                                result.result = user;
                             } else {
                                 status = 401;
                                 result.status = status;
-                                result.error = `Authentication error`;
+                                result.error = {errmsg: 'Authentication error'};
                             }
                             res.status(status).send(result);
                         }).catch(err => {
@@ -79,12 +83,13 @@ module.exports = {
             }
         });
     },
-    getAll: (req, res) => {
+    get: (req, res) => {
         mongoose.connect(connUri, DATABASE_CONNECTION_OPTIONS, (err) => {
             let result = {};
             let status = 200;
+            const name = req.params['name'];
             if (!err) {
-                User.find({}, (err, users) => {
+                User.find(name ? {name} : {}, (err, users) => {
                     if (!err) {
                         result.status = status;
                         result.error = err;
@@ -103,5 +108,24 @@ module.exports = {
                 res.status(status).send(result);
             }
         });
+    },
+    verifyToken: (req, res) => {
+        const token = req.cookies['token'];
+        const result = {};
+        let status = 200;
+        if (token) {
+            const options = {
+                expiresIn: '2d',
+                issuer: 'pacmanpizza'
+            };
+            const data = jwt.verify(token, process.env.JWT_SECRET, options);
+            if (data) {
+                result.name = data.user;
+            }
+        } else {
+            result.result = 'Invalid or missing token';
+            status = 401;
+        }
+        res.status(status).send({result});
     }
 };

@@ -4,8 +4,16 @@ const validateToken = require('../utils').validateToken;
 module.exports = (router) => {
     router.route('/users')
         .post(controller.add)
-        .get(validateToken, controller.getAll); // This route is now protected
+        // TODO token verification
+        .get(controller.get);
+
+    router.route('/user/:name')
+        // TODO token verification
+        .get(controller.get);
 
     router.route('/login')
         .post(controller.login);
+
+    router.route('/token/verification')
+        .get(controller.verifyToken)
 };

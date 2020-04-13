@@ -10,7 +10,6 @@ module.exports = {
             let result = {};
             let status = 201;
 
-            console.log(req.body)
             if (!err) {
                 Products.insertMany([...req.body], (err, collections) => {
                     if (!err) {
@@ -38,7 +37,6 @@ module.exports = {
             const type = req.params['id'];
             const filter = type ? {type}: {};
 
-            console.log(type)
             if (!err) {
                 Products.find(filter, (err, products) => {
                     if (!err) {
