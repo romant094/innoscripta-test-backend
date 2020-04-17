@@ -28,6 +28,7 @@ if (environment !== 'production') {
 app.use('/api/v1', routes(router));
 
 app.use(express.static(path.resolve(__dirname, 'client')));
+app.use(express.static(path.resolve(__dirname, 'public')));
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'index.html'))
 });

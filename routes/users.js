@@ -2,17 +2,17 @@ const controller = require('../controllers/users');
 const validateToken = require('../utils').validateToken;
 
 module.exports = (router) => {
-    router.route('/users')
-        .post(controller.add)
-        // TODO token verification
-        .get(controller.get);
+    router.route('/user/registration')
+        .post(controller.createUser);
 
-    router.route('/user/:name')
-        // TODO token verification
-        .get(controller.get);
+    router.route('/user/update')
+        .post(validateToken, controller.updateUser);
 
-    router.route('/login')
-        .post(controller.login);
+    router.route('/user/:id')
+        .get(validateToken, controller.get);
+
+    router.route('/token/obtaining')
+        .post(controller.obtainToken);
 
     router.route('/token/verification')
         .get(controller.verifyToken)

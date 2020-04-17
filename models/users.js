@@ -7,7 +7,7 @@ const stage = require('../config')[environment];
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
+    email: {
         type: 'String',
         required: true,
         trim: true,
@@ -30,11 +30,11 @@ const userSchema = new Schema({
         trim: true,
         default: ''
     },
-    orders: {
+    currency: {
         type: 'String',
         required: false,
         trim: true,
-        default: ''
+        default: 'usd'
     }
 });
 
