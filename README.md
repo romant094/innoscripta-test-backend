@@ -19,3 +19,6 @@ In this app you can:
 * Change currency in the cart. Also it will sync with user settings by default.
 * Not to wait every time when the products are loaded from the server. After the first time loaded they store locally.
 * See previous detailed orders.
+
+### Contact me
+If you have any questions according to my app please feel free to contact me in [Telegram](https://t.me/romant094).
