@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const smtpUser = process.env.SMTP_USER;
+const smtpPassword = process.env.SMTP_PASSWORD;
 
 module.exports = {
     validateToken: (req, res, next) => {
@@ -35,8 +37,8 @@ module.exports = {
             host: 'smtp.yandex.ru',
             port: 465,
             auth: {
-                user: 'pacman.pizza',
-                pass: '-hu/.JGJ3eUhCxV'
+                user: smtpUser,
+                pass: smtpPassword
             }
         });
         const {cart, total, currency} = data;
