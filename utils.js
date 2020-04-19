@@ -43,11 +43,10 @@ module.exports = {
         });
         const {cart, total, currency} = data;
         const text = `You have made an order.
-            The order contains: ${cart.map(item => item.title).join(', ')}.
-            Total cost: ${total}${currency === 'usd' ? '$' : '€'}.
-            Our manager will contact you soon.
-            Thanks for your choice.            
-        `;
+        The order contains: ${cart.map(item => item.title).join(', ')}.
+        Total cost: ${round(total)}${currency === 'usd' ? '$' : '€'}.
+        Our manager will contact you soon.
+        Thanks for your choice.`;
 
         const message = {
             from: 'pacman.pizza@yandex.ru',
@@ -62,5 +61,6 @@ module.exports = {
                 console.log(info);
             }
         });
-    }
+    },
+    round: (value, countSymbols = 2) => Math.floor(value * 10 ** countSymbols) / 10 ** countSymbols
 };
