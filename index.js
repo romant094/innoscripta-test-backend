@@ -19,11 +19,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-if (environment !== 'production') {
-    const logger = require('morgan');
-    app.use(cors());
-    app.use(logger('dev'));
-}
+app.use(cors());
 
 app.use('/api/v1', routes(router));
 
