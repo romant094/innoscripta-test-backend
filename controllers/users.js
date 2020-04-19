@@ -79,7 +79,6 @@ module.exports = {
                     if (!err) {
                         result.status = status;
                         result.error = err;
-                        console.log(user)
                         result.result = {
                             id: user._id,
                             email: user.email,
@@ -154,7 +153,6 @@ module.exports = {
         });
     },
     verifyToken: (req, res) => {
-        console.log('token ver')
         const token = req.cookies['token'];
         const result = {};
         let status = 200;
