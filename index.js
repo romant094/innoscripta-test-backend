@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
-const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -21,6 +20,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 if (environment !== 'production') {
+    const logger = require('morgan');
     app.use(cors());
     app.use(logger('dev'));
 }
