@@ -3,6 +3,8 @@ const nodemailer = require('nodemailer');
 const smtpUser = process.env.SMTP_USER;
 const smtpPassword = process.env.SMTP_PASSWORD;
 
+const round = (value, countSymbols = 2) => Math.floor(value * 10 ** countSymbols) / 10 ** countSymbols;
+
 module.exports = {
     validateToken: (req, res, next) => {
         const token = req.cookies['token'];
@@ -61,6 +63,5 @@ module.exports = {
                 console.log(info);
             }
         });
-    },
-    round: (value, countSymbols = 2) => Math.floor(value * 10 ** countSymbols) / 10 ** countSymbols
+    }
 };
