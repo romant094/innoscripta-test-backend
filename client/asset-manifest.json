@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.75ed1c5b.chunk.css",
-    "main.js": "/static/js/main.ebe448dc.chunk.js",
-    "main.js.map": "/static/js/main.ebe448dc.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.cb08f1e8.js",
-    "runtime-main.js.map": "/static/js/runtime-main.cb08f1e8.js.map",
-    "static/js/2.7ba5778c.chunk.js": "/static/js/2.7ba5778c.chunk.js",
-    "static/js/2.7ba5778c.chunk.js.map": "/static/js/2.7ba5778c.chunk.js.map",
+    "main.css": "/static/css/main.a1004b73.chunk.css",
+    "main.js": "/static/js/main.6c49c1c5.chunk.js",
+    "main.js.map": "/static/js/main.6c49c1c5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.84578d5e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.84578d5e.js.map",
+    "static/js/2.250a0894.chunk.js": "/static/js/2.250a0894.chunk.js",
+    "static/js/2.250a0894.chunk.js.map": "/static/js/2.250a0894.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.ce2308dbb080ed16826a088c4e4a9b7f.js": "/precache-manifest.ce2308dbb080ed16826a088c4e4a9b7f.js",
+    "precache-manifest.975651c4449942d9adb7fe8148e2af84.js": "/precache-manifest.975651c4449942d9adb7fe8148e2af84.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.75ed1c5b.chunk.css.map": "/static/css/main.75ed1c5b.chunk.css.map",
-    "static/js/2.7ba5778c.chunk.js.LICENSE.txt": "/static/js/2.7ba5778c.chunk.js.LICENSE.txt",
+    "static/css/main.a1004b73.chunk.css.map": "/static/css/main.a1004b73.chunk.css.map",
+    "static/js/2.250a0894.chunk.js.LICENSE.txt": "/static/js/2.250a0894.chunk.js.LICENSE.txt",
     "static/media/bin.svg": "/static/media/bin.4b8e8690.svg",
     "static/media/burger.jpg": "/static/media/burger.0618b56a.jpg",
     "static/media/cart-orange.svg": "/static/media/cart-orange.02f2708e.svg",
     "static/media/drink.jpg": "/static/media/drink.1356c22b.jpg",
     "static/media/logo-small.svg": "/static/media/logo-small.720dc3ff.svg",
     "static/media/logo.svg": "/static/media/logo.4be199a3.svg",
-    "static/media/open-menu.svg": "/static/media/open-menu.4aaf92d0.svg",
+    "static/media/open-menu.svg": "/static/media/open-menu.f107bd7f.svg",
     "static/media/pizza.jpg": "/static/media/pizza.83372b56.jpg",
     "static/media/promo1.jpeg": "/static/media/promo1.e5027dab.jpeg",
     "static/media/promo2.jpeg": "/static/media/promo2.c7ca400e.jpeg",
@@ -28,9 +28,9 @@
     "static/media/wok.jpg": "/static/media/wok.78fa2e32.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.cb08f1e8.js",
-    "static/js/2.7ba5778c.chunk.js",
-    "static/css/main.75ed1c5b.chunk.css",
-    "static/js/main.ebe448dc.chunk.js"
+    "static/js/runtime-main.84578d5e.js",
+    "static/js/2.250a0894.chunk.js",
+    "static/css/main.a1004b73.chunk.css",
+    "static/js/main.6c49c1c5.chunk.js"
   ]
 }
